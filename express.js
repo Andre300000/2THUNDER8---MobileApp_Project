@@ -62,6 +62,16 @@ server.get("/loadall", function (req, res) {
   res.sendFile(path.join(__dirname, "phase2_final.html"));
 });
 
+//
+server.get("/blogs/edit/:id", (req, res) => {
+  const id = req.params.id;
+  console.log(id);
+  Blog.findById(id)
+    .then((result) => {
+      res.render("edit", { blog: result });
+    });
+});
+
 // Upon receiving a post at this url execute callback function
 server.post("/w3review", function (req, res) {
   console.log(req.body.name);
@@ -128,6 +138,7 @@ server.delete("/blogs/:id", (req, res) => {
     res.json({ redirect: "/blogs" });
   });
 });
+
 
 // //find single blog
 // server.get("/single", (req, res) => {
